@@ -1,4 +1,5 @@
 {
   "port": "5000",
+  "jwtSecretKey": "mern typescript tasks-lists",
   "mongoURI": "mongodb+srv://romantokar:q00G5pCz5CMpjzdL@mern-typescript-tasks-l.8ra4p.mongodb.net/mern-typescript-tasks-lists?retryWrites=true&w=majority"
 }

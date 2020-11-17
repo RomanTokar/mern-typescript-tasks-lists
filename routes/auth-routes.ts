@@ -1,9 +1,13 @@
 import {Request, Response, Router} from 'express';
-import {User} from '../models';
 import bcrypt from 'bcrypt';
 import {check, validationResult} from 'express-validator';
+import jwt from 'jsonwebtoken';
+import config from 'config';
+
+import {User} from '../models';
 
 const authRouter = Router();
+const jwtSecretKey: string = config.get('jwtSecretKey');
 
 authRouter.post(
   '/register',
@@ -64,16 +68,22 @@ authRouter.post(
       const user = await User.findOne({email});
 
       if (!user) {
-        return res.status(400).json({message: `Incorrect email or password`})
+        return res.status(400).json({message: `Incorrect email or password`});
       }
 
       const isMatch = await bcrypt.compare(password, user.password);
 
       if (!isMatch) {
-        return res.status(400).json({message: 'Incorrect email or password'})
+        return res.status(400).json({message: 'Incorrect email or password'});
       }
 
-      res.send(user)
+      const token = jwt.sign(
+        {userId: user.id},
+        jwtSecretKey,
+        {expiresIn: '1h'},
+      );
+
+      res.json({token, userId: user.id})
     } catch (e) {
       res.status(500).json({message: e.message});
     }
