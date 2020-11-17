@@ -1,8 +1,8 @@
-import express, {Application} from 'express';
+import express from 'express';
 import config from 'config';
 import mongoose from 'mongoose';
 
-const app: Application = express();
+const app = express();
 const port: number = parseInt(config.get('port'));
 const mongoURI: string = config.get('mongoURI');
 
