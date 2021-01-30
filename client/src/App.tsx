@@ -1,7 +1,6 @@
 import React from 'react';
 import {Route, Switch} from 'react-router-dom';
-import SignIn from './pages/auth/SignIn';
-import SignUp from './pages/auth/SignUp';
+import {Main, SignUp, SignIn} from './pages'
 
 const App = () => {
 
@@ -9,7 +8,7 @@ const App = () => {
     <Switch>
       <Route exact path={'/signIn'} render={() => <SignIn/>}/>
       <Route exact path={'/signUp'} render={() => <SignUp/>}/>
-      <Route exact path={'/task'} render={() => <div>Main</div>}/>
+      <Route exact path={'/'} render={() => <Main/>}/>
     </Switch>
   );
 };

@@ -1,18 +1,25 @@
-import {makeStyles} from '@material-ui/core/styles';
+import {makeStyles, Theme} from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles((theme: Theme) => ({
+  container: {
+    height: '100vh',
+    [theme.breakpoints.up('xs')]: {
+      alignItems: 'center',
+      display: 'flex'
+    }
+  },
   form: {
-    position: 'absolute',
-    left: '50%',
-    top: '50%',
-    transform: 'translate(-50%, -50%)',
     display: 'flex',
     flexDirection: 'column',
     gap: '20px',
     alignItems: 'center',
-    width: 300,
-    padding: '50px 50px'
+    width: '100%',
+    padding: '50px 50px',
+    boxSizing: 'border-box',
+    [theme.breakpoints.down('xs')]: {
+      height: '100%',
+    }
   }
-});
+}));
 
 export default useStyles;
