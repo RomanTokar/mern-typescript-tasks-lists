@@ -1,5 +1,5 @@
 import React, {FC} from 'react';
-import {Field, Form, Formik} from 'formik';
+import {Form, Formik} from 'formik';
 import {Button, Container, Paper, Typography} from '@material-ui/core';
 import {NavLink} from 'react-router-dom';
 import CustomTextField from '../../components/common/CustomTextField';
@@ -45,27 +45,25 @@ export const SignUp: FC = () => {
               >
                 Sign Up
               </Typography>
-              <Field
+              <CustomTextField
+                type={'text'}
                 name={'name'}
                 label={'Name'}
-                as={CustomTextField}
               />
-              <Field
+              <CustomTextField
+                type={'text'}
                 name={'email'}
                 label={'Email'}
-                as={CustomTextField}
               />
-              <Field
+              <CustomTextField
                 type={'password'}
                 name={'password'}
                 label={'Password'}
-                as={CustomTextField}
               />
-              <Field
+              <CustomTextField
                 type={'password'}
                 name={'confirmPassword'}
                 label={'ConfirmPassword'}
-                as={CustomTextField}
               />
               {status && (
                 <Alert severity={'error'}>

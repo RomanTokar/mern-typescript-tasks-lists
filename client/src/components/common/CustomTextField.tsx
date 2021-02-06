@@ -1,19 +1,52 @@
-import {InputProps, TextField} from '@material-ui/core';
-import {FieldAttributes, useField} from 'formik';
-import React, {FC} from 'react';
+import {IconButton, InputAdornment, TextField, useMediaQuery, useTheme} from '@material-ui/core';
+import {FieldHookConfig, useField} from 'formik';
+import React, {useState} from 'react';
+import {Visibility, VisibilityOff} from '@material-ui/icons';
 
-type MyTextFieldProps = FieldAttributes<{}> & {
-  label: string
-  type: string,
-  InputProps: InputProps
-};
+type MyTextFieldProps = {
+  label?: string
+  withPasswordToggling?: boolean
+} & FieldHookConfig<string>;
 
-const CustomTextField: FC<MyTextFieldProps> = ({label, type, InputProps, ...props}) => {
-  const [field, meta] = useField<{}>(props);
+const CustomTextField: React.FC<MyTextFieldProps> = ({
+  label = '',
+  type = 'text',
+  withPasswordToggling = false,
+  ...props
+}) => {
+  const [field, meta] = useField<string>(props);
+  const [showPassword, setShowPassword] = useState<boolean>(false);
   const errorText = meta.error && meta.touched ? meta.error : '';
+  const theme = useTheme();
+  const xsSize = useMediaQuery(theme.breakpoints.down('xs'))
 
-  return <TextField {...field} variant={'outlined'} fullWidth error={!!errorText}
-                    helperText={errorText} {...{label, type, InputProps}}/>;
+  const toggleShowPassword = () => {
+    setShowPassword(prev => !prev);
+  };
+
+  return (
+    <TextField
+      {...field}
+      type={showPassword ? 'text' : 'password'}
+      variant={'outlined'}
+      fullWidth
+      size={xsSize ? 'small' : 'medium'}
+      error={!!errorText}
+      helperText={errorText}
+      label={label}
+      InputProps={{
+        endAdornment: (
+          withPasswordToggling && type === 'password' &&
+          <InputAdornment position={'end'}>
+            <IconButton onClick={toggleShowPassword}>
+              {showPassword ? <Visibility/> : <VisibilityOff/>}
+            </IconButton>
+          </InputAdornment>
+        )
+      }}
+    />
+  );
+
 };
 
 export default CustomTextField;
