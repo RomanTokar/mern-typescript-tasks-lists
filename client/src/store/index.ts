@@ -1,12 +1,12 @@
-import {combineReducers, configureStore} from '@reduxjs/toolkit';
+import {configureStore} from '@reduxjs/toolkit';
 import appReducer from './appSlice';
-
-const reducer = combineReducers({
-  app: appReducer
-})
+import themeSlice from './themeSlice';
 
 const store = configureStore({
-  reducer
+  reducer: {
+    app: appReducer,
+    theme: themeSlice
+  }
 })
 
 export type State = ReturnType<typeof store.getState>;

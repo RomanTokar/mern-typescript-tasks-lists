@@ -1,15 +1,27 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import {Route, Switch} from 'react-router-dom';
-import {Main, SignUp, SignIn} from './pages'
+import {Main, SignIn, SignUp} from './pages';
+import {createMuiTheme, MuiThemeProvider, PaletteType} from '@material-ui/core';
+import {State} from './store';
+import {useSelector} from 'react-redux';
 
 const App = () => {
+  const paletteType = useSelector<State, PaletteType>(state => state.theme.paletteType);
+
+  const theme = useMemo(() => createMuiTheme({
+    palette: {
+      type: paletteType
+    }
+  }), [paletteType]);
 
   return (
-    <Switch>
-      <Route exact path={'/signIn'} render={() => <SignIn/>}/>
-      <Route exact path={'/signUp'} render={() => <SignUp/>}/>
-      <Route exact path={'/'} render={() => <Main/>}/>
-    </Switch>
+    <MuiThemeProvider theme={theme}>
+      <Switch>
+        <Route exact path={'/signIn'} render={() => <SignIn/>}/>
+        <Route exact path={'/signUp'} render={() => <SignUp/>}/>
+        <Route exact path={'/'} render={() => <Main/>}/>
+      </Switch>
+    </MuiThemeProvider>
   );
 };
 
