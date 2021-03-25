@@ -1,12 +1,12 @@
-import {makeStyles, Theme} from '@material-ui/core/styles';
+import { makeStyles, Theme } from '@material-ui/core/styles'
 
 const useStyles = makeStyles((theme: Theme) => ({
   container: {
     height: '100vh',
     [theme.breakpoints.up('xs')]: {
       alignItems: 'center',
-      display: 'flex'
-    }
+      display: 'flex',
+    },
   },
   form: {
     display: 'flex',
@@ -18,8 +18,8 @@ const useStyles = makeStyles((theme: Theme) => ({
     boxSizing: 'border-box',
     [theme.breakpoints.down('xs')]: {
       height: '100%',
-    }
-  }
-}));
+    },
+  },
+}))
 
-export default useStyles;
+export default useStyles

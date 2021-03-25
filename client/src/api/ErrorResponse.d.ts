@@ -1,6 +1,6 @@
 type ErrorElement = {
-  message: string,
-  param: string,
+  message: string
+  param: string
 }
 
 export interface ErrorResponse {
